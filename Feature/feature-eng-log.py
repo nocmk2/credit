@@ -13,6 +13,7 @@ varneedtranslist = ['RevolvingUtilizationOfUnsecuredLines',
                     'NumberOfTime60','NumberOfTime60-89DaysPastDueNotWorse','NumberOfDependents']
 
 for v in varneedtranslist:
+    print(v)
     test[v] = np.log(test[v] + 1)
     train[v] = np.log(train[v] + 1)
 
