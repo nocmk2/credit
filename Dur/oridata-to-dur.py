@@ -1,6 +1,5 @@
 import sys
 import pandas as pd
-import pickle
 sys.path.append("/home/python/credit")
 import DB.db_connects as dbconn
 
@@ -15,11 +14,6 @@ train_cursor = train_collection.find({})
 df_test = pd.DataFrame(list(test_cursor))
 df_train = pd.DataFrame(list(train_cursor))
 
-file_test = open("~/data/dur/test.pickle", "w")
-file_train = open("~/data/dur/train.pickle", "w")
-
-pickle.dump(df_test, file_test, 0)
-pickle.dump(df_train, file_train, 0)
-
-file_test.close()
-file_train.close()
+store = pd.HDFStore('/home/python/data/dur/store.h5')
+store['test'] = df_test
+store['train'] = df_train
