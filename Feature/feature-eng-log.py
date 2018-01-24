@@ -13,9 +13,8 @@ varneedtranslist = ['RevolvingUtilizationOfUnsecuredLines',
                     'NumberOfTime60','NumberOfTime60-89DaysPastDueNotWorse','NumberOfDependents']
 
 for v in varneedtranslist:
-    print(v)
-    test[v] = np.log(test[v] + 1)
-    train[v] = np.log(train[v] + 1)
+    test[v] = np.log(pd.to_numeric(test[v]) + 1)
+    train[v] = np.log(pd.to_numeric(train[v]) + 1)
 
 test.to_csv('~/data/testing-log-f10.csv')
 train.to_csv('~/data/training-log-f10.csv')
