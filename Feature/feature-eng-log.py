@@ -1,32 +1,26 @@
 import sys
 import numpy as np
 import pandas as pd
-import pickle
-sys.path.append("..")
-import DB.db_connects as dbconn
 
-client = dbconn.microrulemongoclient
-db = client['rule']
-test_collection = db['test_model_data']
-train_collection = db['train_model_data']
+store = pd.HDFStore('/home/python/data/dur/store.h5')
+test = store['test']
+train = store['train']
 
-test_cursor = test_collection.find({})
-train_cursor = train_collection.find({})
+varneedtranslist = ['RevolvingUtilizationOfUnsecuredLines',
+                    'NumberOfTime30-59DaysPastDueNotWorse',
+                    'DebtRatio','MonthlyIncome','NumberOfOpenCreditLinesAndLoans',
+                    'NumberOfTimes90DaysLate','NumberRealEstateLoansOrLines',
+                    'NumberOfTime60','NumberOfTime60-89DaysPastDueNotWorse','NumberOfDependents']
 
-df_test = pd.DataFrame(list(test_cursor))
-df_train = pd.DataFrame(list(train_cursor))
+for v in varneedtranslist:
+    test[v] = np.log(test[v]_+ 1)
+    train[v] = np.log(train[v] + 1)
 
-df_train.describe().to_csv("~/data/desc-training.csv")
-df_test.describe().to_csv("~/data/desc-testing.csv")
+test.to_csv('~/data/testing-log-f10.csv')
+train.to_csv('~/data/training-log-f10.csv')
 
-file_test = open("~/data/dur/test.pickle","w")
-file_train = open("~/data/dur/train.pickle","w")
-
-pickle.dump(df_test, file_test, 0)
-pickle.dump(df_train, file_train, 0)
-
-file_test.close()
-file_train.close()
+store['test_log'] = test
+store['train_log'] = train
 
 # a = np.log(data.RevolvingUtilizationOfUnsecuredLines+1)
 
