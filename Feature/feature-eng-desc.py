@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 import pandas as pd
-sys.path.append("..")
+sys.path.append("~/credit/")
 import DB.db_connects as dbconn
 
 client = dbconn.microrulemongoclient
