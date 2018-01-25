@@ -14,8 +14,8 @@ varneedtranslist = ['RevolvingUtilizationOfUnsecuredLines',
 
 for v in varneedtranslist:
     with np.errstate(invalid='ignore'):
-        test[v] = np.log(pd.to_numeric(test[v]) + 1)
-        train[v] = np.log(pd.to_numeric(train[v]) + 1)
+        test[v] = np.log(pd.to_numeric(test[v], errors='coerce') + 1)
+        train[v] = np.log(pd.to_numeric(train[v], errors='coerce') + 1)
 
 test.to_csv('~/data/testing-log-f10.csv')
 train.to_csv('~/data/training-log-f10.csv')
