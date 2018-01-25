@@ -10,7 +10,7 @@ varneedtranslist = ['RevolvingUtilizationOfUnsecuredLines',
                     'NumberOfTime30-59DaysPastDueNotWorse',
                     'DebtRatio','MonthlyIncome','NumberOfOpenCreditLinesAndLoans',
                     'NumberOfTimes90DaysLate','NumberRealEstateLoansOrLines',
-                    'NumberOfTime60','NumberOfTime60-89DaysPastDueNotWorse','NumberOfDependents']
+                    'NumberOfTime60-89DaysPastDueNotWorse','NumberOfDependents']
 
 for v in varneedtranslist:
     with np.errstate(invalid='ignore'):
