@@ -15,5 +15,5 @@ df_test = pd.DataFrame(list(test_cursor))
 df_train = pd.DataFrame(list(train_cursor))
 
 store = pd.HDFStore('/home/python/data/dur/store.h5')
-store['test'] = df_test
-store['train'] = df_train
+store.append('test', df_test)
+store.append('train', df_train)
