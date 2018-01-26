@@ -15,6 +15,6 @@ df_test = pd.DataFrame(list(test_cursor))
 df_train = pd.DataFrame(list(train_cursor))
 
 h5filename = '/home/python/data/dur/store.h5'
-store = pd.HDFStore(h5filename)
+# store = pd.HDFStore(h5filename)
 df_test.to_hdf(h5filename,'test',mode='w', table=True )
 df_train.to_hdf(h5filename,'train',mode = 'w', table = True)
