@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 import pandas as pd
 sys.path.append("/home/python/credit")
 import DB.db_connects as dbconn
@@ -13,6 +14,9 @@ train_cursor = train_collection.find({})
 
 df_test = pd.DataFrame(list(test_cursor))
 df_train = pd.DataFrame(list(train_cursor))
+
+df_test = df_test.replace('NA', np.NaN)
+df_train = df_train.replace('NA', np.NaN)
 
 h5filename = '/home/python/data/dur/store.h5'
 store = pd.HDFStore(h5filename)
