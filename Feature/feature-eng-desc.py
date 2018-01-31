@@ -15,7 +15,7 @@ train_desc = train.describe()
 test_desc.to_csv("~/data/desc-training.csv")
 train_desc.to_csv("~/data/desc-testing.csv")
 
-store['test_desc'] = test_desc 
+store['test_desc'] = test_desc
 store['train_desc'] = train_desc
 
 # a = np.log(data.RevolvingUtilizationOfUnsecuredLines+1)
