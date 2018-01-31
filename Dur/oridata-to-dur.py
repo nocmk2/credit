@@ -2,13 +2,21 @@ import sys
 import os
 import numpy as np
 import pandas as pd
-sys.path.append("/home/python/credit")
-import DB.db_connects as dbconn
-
-CSV_DATA_PATH = '/home/python/data'
-DATA_FROM = 'MongoDB'   # CSV
+import configparser
+config = configparser.ConfigParser()
+config.readfp(open(os.path.abspath('.') + '/Conf/main.conf'))
+CSV_DATA_PATH = config.get('data_source', 'csv_data_path')
+DATA_FROM = config.get('data_source', 'ori_data_from')
+CSV_FILE_TEST = config.get('data_source', 'csv_file_test')
+CSV_FILE_TRAIN = config.get('data_source', 'csv_file_train')
+H5FILENAME = config.get('data_source', 'h5filename')
+WORK_PATH = config.get('data_source', 'work_path')
+df_test = pd.DataFrame()
+df_train = pd.DataFrame()
 
 if DATA_FROM == 'MongoDB':
+    sys.path.append("/home/python/credit")
+    import DB.db_connects as dbconn
     client = dbconn.microrulemongoclient
     db = client['rule']
     test_collection = db['test_model_data']
@@ -22,11 +30,11 @@ if DATA_FROM == 'MongoDB':
 
     df_test = df_test.replace('NA', np.NaN)
     df_train = df_train.replace('NA', np.NaN)
-else if DATA_FROM == 'CSV':
-    df_test = pd.read_csv(os.path.join(CSV_DATA_PATH, 'cs-test.csv' ))
-    df_train = pd.read_csv(os.path.join(CSV_DATA_PATH, 'cs-training.csv' ))
+elif DATA_FROM == 'CSV':
+    df_test = pd.read_csv(os.path.join(CSV_DATA_PATH, CSV_FILE_TEST))
+    df_train = pd.read_csv(os.path.join(CSV_DATA_PATH, CSV_FILE_TRAIN))
 
-h5filename = '/home/python/data/dur/store.h5'
+h5filename = os.path.join(CSV_DATA_PATH, H5FILENAME)
 store = pd.HDFStore(h5filename)
 store['test'] = df_test
 store['train'] = df_train
