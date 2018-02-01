@@ -4,6 +4,8 @@ sys.path.append(os.path.join(os.path.dirname(__file__),'..'))
 import numpy as np
 import pandas as pd
 from Conf.loadconf import *
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 from pandas.plotting import scatter_matrix
 
