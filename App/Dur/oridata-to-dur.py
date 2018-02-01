@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import configparser
 config = configparser.ConfigParser()
-config.readfp(open(os.path.abspath('.') + '/Conf/main.conf'))
+config.readfp(open(sys.path[0] + '/../Conf/main.conf'))
 CSV_DATA_PATH = config.get('data_source', 'csv_data_path')
 DATA_FROM = config.get('data_source', 'ori_data_from')
 CSV_FILE_TEST = config.get('data_source', 'csv_file_test')
@@ -15,7 +15,7 @@ df_test = pd.DataFrame()
 df_train = pd.DataFrame()
 
 if DATA_FROM == 'MongoDB':
-    sys.path.append("/home/python/credit")
+    sys.path.append(WORK_PATH)
     import DB.db_connects as dbconn
     client = dbconn.microrulemongoclient
     db = client['rule']

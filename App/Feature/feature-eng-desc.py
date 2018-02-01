@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import configparser
 config = configparser.ConfigParser()
-config.readfp(open(os.path.abspath('.') + '/Conf/main.conf'))
+config.readfp(open(sys.path[0] + '/../Conf/main.conf'))
 CSV_DATA_PATH = config.get('data_source', 'csv_data_path')
 DATA_FROM = config.get('data_source', 'ori_data_from')
 CSV_FILE_TEST = config.get('data_source', 'csv_file_test')
@@ -23,8 +23,12 @@ train_desc = train.describe()
 test_desc.to_csv(os.path.join(CSV_DATA_PATH,'desc-test.csv'))
 train_desc.to_csv(os.path.join(CSV_DATA_PATH,'desc-training.csv'))
 
+# save to h5
 store['test_desc'] = test_desc
 store['train_desc'] = train_desc
+
+# save to mongo
+
 
 # a = np.log(data.RevolvingUtilizationOfUnsecuredLines+1)
 
