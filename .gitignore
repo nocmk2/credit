@@ -34,3 +34,7 @@ vignettes/*.pdf
 
 # db conn
 db_connects.py
+
+__pycache__/*.*
+*.pyc
+*.pyo
